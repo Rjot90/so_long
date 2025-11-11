@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:29:34 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 16:23:06 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/11/11 19:26:25 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+static void get_images_flood(t_game *game)
+{
+	int width;
+	int height;
+
+	game->textures->fill = mlx_xpm_file_to_image(game->mlx, "textures/fill.xpm", 
+        &width, &height);
+    game->textures->prefill = mlx_xpm_file_to_image(game->mlx, 
+        "textures/prefill.xpm", &width, &height);
+	game->textures->coinf = mlx_xpm_file_to_image(game->mlx, "textures/coinf.xpm",
+		 &width, &height);
+}
 
 void	get_images(t_game *game)
 {
@@ -35,10 +48,7 @@ void	get_images(t_game *game)
 			"textures/player_right.xpm", &width, &height);
 	game->textures->lava = mlx_xpm_file_to_image(game->mlx,
 			"textures/lava.xpm", &width, &height);
-	game->textures->fill = mlx_xpm_file_to_image(game->fmlx, "textures/fill.xpm", 
-        &width, &height);
-    game->textures->prefill = mlx_xpm_file_to_image(game->fmlx, 
-        "textures/prefill.xpm", &width, &height);
+	get_images_flood(game);
 }
 
 void	render_map(t_game *game)
