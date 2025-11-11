@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:29:34 by apiscopo          #+#    #+#             */
-/*   Updated: 2024/12/16 00:31:31 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:23:06 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	get_images(t_game *game)
 			"textures/player_right.xpm", &width, &height);
 	game->textures->lava = mlx_xpm_file_to_image(game->mlx,
 			"textures/lava.xpm", &width, &height);
+	game->textures->fill = mlx_xpm_file_to_image(game->fmlx, "textures/fill.xpm", 
+        &width, &height);
+    game->textures->prefill = mlx_xpm_file_to_image(game->fmlx, 
+        "textures/prefill.xpm", &width, &height);
 }
 
 void	render_map(t_game *game)
@@ -54,7 +58,7 @@ void	render_map(t_game *game)
 			else if (game->grid[y][x] == 'C')
 				mlx_put_image_to_window(game->mlx, game->win,
 					game->textures->collectible, x * 64, y * 64);
-			else if (game->grid[y][x] == '0' || 'T')
+			else if (game->grid[y][x] == '0' || game->grid[y][x] == 'T')
 				mlx_put_image_to_window(game->mlx, game->win,
 					game->textures->floor, x * 64, y * 64);
 			x++;

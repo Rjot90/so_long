@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 03:53:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2024/12/16 01:55:34 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:01:51 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	flood_fill(t_game *game, int x, int y)
 		&& game->grid_bis[y][x] != 'P'))
 		return ;
 	if (game->grid_bis[y][x] == '0')
-		game->grid_bis[y][x] = 'F';
+		game->grid_bis[y][x] = 'U';
 	if (game->grid_bis[y][x] == 'C')
 	{
 		game->grid_bis[y][x] = 'T';
@@ -55,6 +55,7 @@ void	flood_fill(t_game *game, int x, int y)
 		game->grid_e++;
 		game->grid_bis[y][x] = 'T';
 	}
+	print_flood(game->grid_bis, game);
 	flood_fill(game, x + 1, y);
 	flood_fill(game, x - 1, y);
 	flood_fill(game, x, y + 1);
@@ -104,8 +105,10 @@ void	free_ressources_grid(t_game *game)
 {
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
+	#ifdef _linux_
 	if (game->win)
 		mlx_destroy_display(game->mlx);
+	# else
 	if (game->mlx)
 		free(game->mlx);
 	if (game->textures)
@@ -114,3 +117,5 @@ void	free_ressources_grid(t_game *game)
 	free_grid(game->grid_bis);
 	exit(0);
 }
+
+#endif

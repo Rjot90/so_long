@@ -1,70 +1,82 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/05 18:38:51 by apiscopo          #+#    #+#              #
-#    Updated: 2024/12/16 00:46:31 by apiscopo         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME		= so_long
 
-NAME = so_long
-LIBMLX = mlx/libmlx.a
-LIBFT = libft/libft.a
-PRINTF = printf/printf.a
+# Libraries
+LIBFT_DIR	= libft
+LIBFT		= $(LIBFT_DIR)/libft.a
 
-#//////////////////////////////////////////////////////////////////////////////
-#		ALL FILES
-#//////////////////////////////////////////////////////////////////////////////
+PRINTF_DIR	= printf
+PRINTF		= $(PRINTF_DIR)/printf.a
 
-SRCS =	$(wildcard src/*.c)
+# Sources & Headers
+SRCS		= $(wildcard src/*.c)
+HEADERS		= includes/so_long.h
 
-HEAD =	includes/so_long.h
+# Compiler settings
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror -g -O0
+INC			= -I ./includes -I ./src
 
-#//////////////////////////////////////////////////////////////////////////////
-#		COMMAND SHORTCUTS
-#//////////////////////////////////////////////////////////////////////////////
+AR			= ar rcs
+RM			= rm -rf
 
-CC = gcc -g -O0
-CF = -Wall -Werror -Wextra #-fsanitize=address -static-libasan
-SL = -Imlx -Imlx_linux -lXext -lX11 -lm -lz
-CI = -I ./src/
+# ========================= #
+#      OS DETECTION         #
+# ========================= #
 
+UNAME_S := $(shell uname -s)
 
-AR = ar rcs
-RM = rm -rf
+ifeq ($(UNAME_S), Linux)
+	MLX_DIR		= mlx/mlx_linux
+	MLX_LIB		= $(MLX_DIR)/libmlx.a
+	MLX_FLAGS	= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
+	MLX_INC		= -I$(MLX_DIR)
+else ifeq ($(UNAME_S), Darwin)
+	MLX_DIR		= mlx/mlx_mac
+	MLX_LIB		= $(MLX_DIR)/libmlx.a
+	MLX_FLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+	MLX_INC		= -I$(MLX_DIR)
+	CFLAGS		+= -DGL_SILENCE_DEPRECATION
+endif
 
-#//////////////////////////////////////////////////////////////////////////////
-#		RULES
-#//////////////////////////////////////////////////////////////////////////////
+# ========================= #
+#         RULES             #
+# ========================= #
 
-all: ${NAME}
+all: $(NAME)
 
-# Binary creation
+$(NAME): $(SRCS) $(HEADERS) $(LIBFT) $(PRINTF) $(MLX_LIB)
+	$(CC) $(CFLAGS) $(INC) $(MLX_INC) $(SRCS) $(LIBFT) $(PRINTF) $(MLX_FLAGS) -o $(NAME)
 
-${NAME}: ${SRCS} ${HEAD} ${PRINTF} ${LIBFT} ${LIBMLX}
-	${CC} ${CF} ${CI} ${SRCS} ${PRINTF} ${LIBFT} ${LIBMLX} ${SL} -o ${NAME}
+$(LIBFT):
+	@echo "\n🧱 Building libft..."
+	@make -C $(LIBFT_DIR)
 
-${PRINTF}:
-	make -C printf/
+$(PRINTF):
+	@echo "\n🖨️  Building printf..."
+	@make -C $(PRINTF_DIR)
 
-${LIBMLX}:
-	make -C mlx/
-
-${LIBFT}:
-	make -C libft/
-
-# Mandatory rules
+$(MLX_LIB):
+	@echo "\n🎨 Building MiniLibX..."
+	@make -C $(dir $(MLX_LIB))
 
 clean:
-	${RM} mlx/*.o mlx/test/*.o src/*.o libft/*.o
+	@echo "\n🧹 Cleaning object files..."
+	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(PRINTF_DIR)
+	@make clean -C $(dir $(MLX_LIB))
+	@$(RM) src/*.o
 
 fclean: clean
-	${RM} ${NAME}
-	make clean -C mlx
-	make clean -C libft
-	make fclean -C printf
+	@echo "\n🔥 Full clean..."
+	@make fclean -C $(PRINTF_DIR)
+	@$(RM) $(NAME)
 
 re: fclean all
+
+run: all
+	@./$(NAME) maps/map.ber
+
+# ========================= #
+#        PHONY              #
+# ========================= #
+.PHONY: all clean fclean re run

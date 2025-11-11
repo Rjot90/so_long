@@ -3,27 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:54:31 by apiscopo          #+#    #+#             */
-/*   Updated: 2024/12/17 18:05:16 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:16:19 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define BUFFER_SIZE 1000
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_ESC 65307
-# include "../mlx/mlx.h"
+# define BUFFER_SIZE 10
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdarg.h>
 # include <unistd.h>
+
+/* OS Detection */
+# ifdef __APPLE__
+#  define OS_MAC 1
+# else
+#  define OS_LINUX 1
+# endif
+
+/* Keycodes for Mac */
+# ifdef OS_MAC
+#  define KEY_W          13
+#  define KEY_A          0
+#  define KEY_S          1
+#  define KEY_D          2
+#  define KEY_M          46
+#  define KEY_LEFT       123
+#  define KEY_RIGHT      124
+#  define KEY_ESC        53
+#  include "../mlx/mlx_mac/mlx.h"
+# endif
+
+/* Keycodes for Linux */
+# ifdef OS_LINUX
+#  define KEY_W          119
+#  define KEY_A           97
+#  define KEY_S          115
+#  define KEY_D          100
+#  define KEY_M          109
+#  define KEY_LEFT       65361
+#  define KEY_RIGHT      65363
+#  define KEY_ESC        65307
+#  include "../mlx/mlx_linux/mlx.h"
+# endif
 
 typedef struct s_textures
 {
@@ -44,6 +71,7 @@ typedef struct s_textures
 typedef struct s_game
 {
 	void		*mlx;
+	void		*fmlx;
 	void		*win;
 	void		*winf;
 	char		**grid;
@@ -97,7 +125,9 @@ int		pos_player(t_game *game);
 int		pos_exit(t_game *game);
 int		fill_grid_bis(int fd, int lines, t_game *game);
 int		fill_grid(int fd, int lines, t_game *game);
+void    init_winf(t_game *game);
 int		check_flood(int fd, int n_lines, t_game *game, char *file);
+void    print_flood(char **grid, t_game *game);
 void	flood_fill(t_game *game, int x, int y);
 
 void	move_player(t_game *game, int dx, int dy);

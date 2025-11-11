@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:11:18 by apiscopo          #+#    #+#             */
-/*   Updated: 2024/12/17 17:53:43 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:30:30 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,18 @@ int	begin_render(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-	{
-		ft_printf("Error, impossible to init mlx\n");
-		return (0);
-	}
+		return (ft_printf("Error, impossible to init mlx\n"), 0);
 	game->win = mlx_new_window(game->mlx, game->length * 64,
 			game->height * 64 + 32, "so_long");
 	if (!game->win)
-	{
-		ft_printf("Error, impossible to init win\n");
-		return (0);
-	}
+		return (ft_printf("Error, impossible to init window\n"), 0);
 	game->textures = (t_textures *)malloc(sizeof(t_textures));
 	if (!game->textures)
-	{
-		ft_printf("Error, impossible to create textures\n");
-		return (0);
-	}
+		return (ft_printf("Error, impossible to create textures\n"), 0);
 	get_images(game);
+	flood_fill(game, game->player_x, game->player_y);
+	if (game->coin != game->grid_c || game->grid_e == 0 || game->grid_e > 4)
+		return (free_grid(game->grid_bis), 0);
 	render_map(game);
 	put_enemy(game);
 	return (1);

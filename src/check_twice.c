@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_twice.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:28:10 by apiscopo          #+#    #+#             */
-/*   Updated: 2024/12/16 02:13:57 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:29:46 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ int	check_flood(int fd, int n_lines, t_game *game, char *file)
 	fd = open(file, O_RDONLY);
 	if (!fill_grid_bis(fd, n_lines, game))
 		return (0);
-	flood_fill(game, game->player_x, game->player_y);
-	if (game->coin != game->grid_c || game->grid_e == 0 || game->grid_e > 4)
-	{
-		free_grid(game->grid_bis);
-		return (0);
-	}
 	return (1);
 }
 
