@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:54:31 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 16:16:19 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/11/11 20:32:10 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_textures
 	void	*collectible;
 	void	*exit;
 	void	*lava;
+	void	*lavaf;
 	void	*fill;
 	void	*coinf;
 	void	*prefill;

@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 03:53:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 19:26:09 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 20:40:03 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	flood_fill(t_game *game, int x, int y)
 		game->grid_bis[y][x] = '0';
 	if (x < 0 || y < 0 || (game->grid_bis[y][x] != '0'
 		&& game->grid_bis[y][x] != 'E' && game->grid_bis[y][x] != 'C'
-		&& game->grid_bis[y][x] != 'P'))
+		&& game->grid_bis[y][x] != 'P' && game->grid_bis[y][x] != 'L'))
 		return ;
 	if (game->grid_bis[y][x] == '0')
 		game->grid_bis[y][x] = 'U';
@@ -49,7 +49,7 @@ void	flood_fill(t_game *game, int x, int y)
 		game->grid_c++;
 	}
 	if (game->grid_bis[y][x] == 'L')
-		game->grid_bis[y][x] = 'F';
+		game->grid_bis[y][x] = 'J';
 	if (game->grid_bis[y][x] == 'E')
 	{
 		game->grid_e++;

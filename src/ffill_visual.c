@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 20:47:35 by bullestico        #+#    #+#             */
-/*   Updated: 2025/11/11 19:28:24 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 20:45:54 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static void	print_flood2(char **grid, t_game *game, int x, int y)
 	else if (grid[y][x] == 'Q')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->textures->coinf, x * 64, y * 64);
+	else if (grid[y][x] == 'J')
+		mlx_put_image_to_window(game->mlx, game->win, game->textures->lavaf,
+			 x * 64, y * 64);
 }
 
 
@@ -54,5 +57,5 @@ void    print_flood(char **grid, t_game *game)
 		}
 		y++;
 	}
-    //usleep(1);
+    usleep(1e4);
 }
