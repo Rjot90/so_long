@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:54:31 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 16:16:19 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/11/12 00:05:50 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ typedef struct s_game
 	void		*winf;
 	char		**grid;
 	char		**grid_bis;
+	char		*file;
 	int			height;
+	int			level;
 	int			length;
 	int			player_x;
 	int			player_y;
@@ -87,7 +89,8 @@ typedef struct s_game
 	int			grid_c;
 	int			grid_e;
 	int			grid_l;
-	char		*file;
+	int			rd_num_x;
+	int			rd_num_y;
 	t_textures	*textures;
 }	t_game;
 
