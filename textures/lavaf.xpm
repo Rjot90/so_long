@@ -182,7 +182,7 @@ static char *dummy[]={
 "bs c #710505",
 "az c #711010",
 "aI c #717272",
-"Qt c #727272",
+"Qt c #ffffffff",
 "aO c #737373",
 ".w c #750000",
 "bF c #756a6a",

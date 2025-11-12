@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:11:18 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 19:20:55 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 21:05:11 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,10 @@ int	main(int argc, char **argv)
 	}
 	put_null(&game);
 	if (!read_map(argv[1], &game))
-	{
-		ft_printf("Error, Map Invalid !\n");
-		free_grid(game.grid);
-		return (0);
-	}
+		return (ft_printf("Error, Map Invalid !\n"), free_grid(game.grid), 0);
 	if (!begin_render(&game))
-	{
-		ft_printf("Error, Render impossible !\n");
-		free_resources(&game);
-		return (0);
-	}
+		return (ft_printf("Error, Render impossible !\n"), 
+		free_resources(&game), 0);
 	mlx_hook(game.win, 2, 1L << 0, handle_key, &game);
 	mlx_hook(game.win, 17, 0, exit_param, NULL);
 	mlx_loop(game.mlx);

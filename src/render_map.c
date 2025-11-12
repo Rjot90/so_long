@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:29:34 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 19:26:25 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/11 20:33:21 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void get_images_flood(t_game *game)
         "textures/prefill.xpm", &width, &height);
 	game->textures->coinf = mlx_xpm_file_to_image(game->mlx, "textures/coinf.xpm",
 		 &width, &height);
+	game->textures->lavaf = mlx_xpm_file_to_image(game->mlx, "textures/lavaf.xpm",
+		&width, &height);
 }
 
 void	get_images(t_game *game)

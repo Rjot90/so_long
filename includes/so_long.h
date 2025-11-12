@@ -6,7 +6,7 @@
 /*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:54:31 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/12 00:05:50 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/11/12 15:48:50 by bullestico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_textures
 	void	*collectible;
 	void	*exit;
 	void	*lava;
+	void	*lavaf;
 	void	*fill;
 	void	*coinf;
 	void	*prefill;
