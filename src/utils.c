@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 03:53:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 20:40:03 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:11:54 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	check_call(int fd, int n_line, t_game *game, char *file)
+int	check_call(t_game *game)
 {
-	if (!fill_grid(fd, n_line, game))
-		return (0);
 	if (!check_map(game))
 		return (0);
 	if (!check_wall(game))
@@ -28,7 +26,7 @@ int	check_call(int fd, int n_line, t_game *game, char *file)
 		return (0);
 	if (!size_map(game))
 		return (0);
-	if (!check_flood(fd, n_line, game, file))
+	if (!check_flood(game))
 		return (0);
 	return (1);
 }

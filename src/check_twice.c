@@ -3,40 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   check_twice.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:28:10 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 16:29:46 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/11/14 17:10:05 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	check_flood(int fd, int n_lines, t_game *game, char *file)
+int	check_flood(t_game *game)
 {
-	close(fd);
-	fd = open(file, O_RDONLY);
-	if (!fill_grid_bis(fd, n_lines, game))
+	if (!fill_grid_bis(game))
 		return (0);
 	return (1);
 }
 
-int	fill_grid_bis(int fd, int n_lines, t_game *game)
+int	fill_grid_bis(t_game *game)
 {
-	char	*line;
 	int		i;
 
-	game->grid_bis = (char **)malloc(sizeof(char *) * (n_lines + 1));
+	game->grid_bis = (char **)malloc(sizeof(char *) * (game->rd_num_y + 1));
 	if (!game->grid_bis)
 		return (0);
 	i = 0;
-	while (i < n_lines)
+	while (i < game->rd_num_y)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			return (0);
-		game->grid_bis[i] = ft_strdup(line);
-		free(line);
+		game->grid_bis[i] = ft_strdup(game->grid[i]);
 		if (!game->grid_bis[i])
 			return (0);
 		i++;

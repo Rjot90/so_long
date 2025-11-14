@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bullestico <bullestico@student.42.fr>      +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:54:31 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/12 15:48:50 by bullestico       ###   ########.fr       */
+/*   Updated: 2025/11/14 17:13:25 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # define BUFFER_SIZE 10
 # include "../libft/libft.h"
 # include <fcntl.h>
-# include <unistd.h>
 # include <stdarg.h>
 # include <unistd.h>
+# include <stdio.h>
 
 /* OS Detection */
 # ifdef __APPLE__
@@ -51,6 +51,14 @@
 #  define KEY_ESC        65307
 #  include "../mlx/mlx_linux/mlx.h"
 # endif
+
+typedef struct s_proba
+{
+	int	rep;
+	int	flag_player;
+	int has_exit;
+	char grid_char_before;
+}	t_proba;
 
 typedef struct s_textures
 {
@@ -93,6 +101,7 @@ typedef struct s_game
 	int			rd_num_x;
 	int			rd_num_y;
 	t_textures	*textures;
+	t_proba		*proba;
 }	t_game;
 
 char	*get_next_line(int fd);
@@ -114,9 +123,11 @@ ssize_t	ft_putun(unsigned int n);
 ssize_t	ft_puthex(unsigned int n, int index);
 ssize_t	convert(const char *str, va_list *args);
 
+int generate(t_game *game);
+
 int		begin_render(t_game *game);
-int		check_call(int fd, int n_line, t_game *game, char *file);
-int		read_map(char *file, t_game *game);
+int		check_call(t_game *game);
+int		read_map(char *file);
 int		check_map(t_game *game);
 int		check_wall(t_game *game);
 int		check_coin(t_game *game);
@@ -127,10 +138,10 @@ int		size_map(t_game *game);
 int		get_line_length(char *line);
 int		pos_player(t_game *game);
 int		pos_exit(t_game *game);
-int		fill_grid_bis(int fd, int lines, t_game *game);
+int		fill_grid_bis(t_game *game);
 int		fill_grid(int fd, int lines, t_game *game);
 void    init_winf(t_game *game);
-int		check_flood(int fd, int n_lines, t_game *game, char *file);
+int		check_flood(t_game *game);
 void    print_flood(char **grid, t_game *game);
 void	flood_fill(t_game *game, int x, int y);
 

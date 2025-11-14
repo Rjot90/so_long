@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 21:39:26 by nopauli           #+#    #+#             */
-/*   Updated: 2024/12/13 19:29:15 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:12:45 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	fill_grid(int fd, int lines, t_game *game)
 	return (1);
 }
 
-int	read_map(char *file, t_game *game)
+int	read_map(char *file)
 {
 	int		fd;
 	int		n_line;
@@ -125,7 +125,5 @@ int	read_map(char *file, t_game *game)
 		return (0);
 	close(fd);
 	fd = open(file, O_RDONLY);
-	if (!check_call(fd, n_line, game, file))
-		return (0);
 	return (1);
 }

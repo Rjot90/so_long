@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:11:18 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 21:05:11 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:13:55 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	begin_render(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (ft_printf("Error, impossible to init mlx\n"), 0);
-	game->win = mlx_new_window(game->mlx, game->length * 64,
-			game->height * 64 + 32, "so_long");
+	game->win = mlx_new_window(game->mlx, game->rd_num_x * 64,
+			game->rd_num_y * 64 + 32, "so_long");
 	if (!game->win)
 		return (ft_printf("Error, impossible to init window\n"), 0);
 	game->textures = (t_textures *)malloc(sizeof(t_textures));
@@ -69,11 +69,12 @@ int	main(int argc, char **argv)
 	if (argc < 2 || argc > 2)
 	{
 		ft_printf("usage: %s 'map'\n", argv[0]);
-		return (0);
 	}
 	put_null(&game);
-	if (!read_map(argv[1], &game))
+	game.proba = (t_proba *)malloc(sizeof(t_proba));
+	if (generate(&game))
 		return (ft_printf("Error, Map Invalid !\n"), free_grid(game.grid), 0);
+	check_call(&game);
 	if (!begin_render(&game))
 		return (ft_printf("Error, Render impossible !\n"), 
 		free_resources(&game), 0);
