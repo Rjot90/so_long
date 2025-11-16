@@ -6,7 +6,7 @@
 /*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:29:34 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/11 20:33:21 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/15 17:33:11 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ void	render_map(t_game *game)
 	int	y;
 
 	y = 0;
-	while (y < game->height)
+	printf("prout\n");
+	while (y < game->rd_num_y)
 	{
 		x = 0;
-		while (x < game->length)
+		while (x < game->rd_num_x)
 		{
 			if (game->grid[y][x] == '1')
 				mlx_put_image_to_window(game->mlx, game->win,

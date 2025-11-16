@@ -57,10 +57,6 @@ quand meme avoir une tolerance pour eviter ce genre de cas
 
 111111111111111111
 1P01EC10101CC
-
-
-
-
 */
 
 static char generate_char(t_game *game)
@@ -69,8 +65,6 @@ static char generate_char(t_game *game)
 	int r;
 
 	r = rand() % 100;
-	if (game->proba->rep >= 3)
-		r = 99;
 	if (!game->proba->flag_player && r < 5)
 	{
 		game->proba->flag_player = 1;
@@ -88,12 +82,44 @@ static char generate_char(t_game *game)
 	else if (r < 70)
 		c = 'C';
 	else
-		c = 'L';
+		c = '1';
 	if (c == game->proba->grid_char_before)
 		game->proba->rep++;
 	else
 		game->proba->rep = 0;
 	return (c);
+}
+
+static void print_gen(t_game *game, int y, int x)
+{
+    mlx_put_image_to_window(game->mlx, game->win,
+			game->textures->wall, x * 64, y * 64);
+    // usleep(1e3);
+    mlx_put_image_to_window(game->mlx, game->win,
+			game->textures->floor, x * 64, y * 64);
+    // usleep(1e3);
+    mlx_put_image_to_window(game->mlx, game->win,
+			game->textures->collectible, x * 64, y * 64);
+    // usleep(1e3);
+	if (game->grid[y][x] == '1')
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->textures->wall, x * 64, y * 64);
+	else if (game->grid[y][x] == '0')
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->textures->floor, x * 64, y * 64);
+	else if (game->grid[y][x] == 'P')
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->textures->player_face, x * 64, y * 64);
+	else if (game->grid[y][x] == 'C')
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->textures->collectible, x * 64, y * 64);
+	else if (game->grid[y][x] == 'E')
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->textures->exit, x * 64, y * 64);
+	else if (game->grid[y][x] == 'L')
+				mlx_put_image_to_window(game->mlx, game->win,
+					game->textures->lava, x * 64, y * 64);
+    // usleep(1e4);
 }
 
 static int generate_line(t_game *game)
@@ -102,6 +128,7 @@ static int generate_line(t_game *game)
 	int x;
 
 	y = 0;
+    srand(time(NULL));
 	while (y < game->rd_num_y)
 	{
 		x = 0;
@@ -112,11 +139,15 @@ static int generate_line(t_game *game)
 		{
 			if (y == 0 || y == game->rd_num_y - 1
 				|| x == 0 || x == game->rd_num_x - 1)
-				game->grid[y][x] = '1';
+				{
+					game->grid[y][x] = '1';
+					print_gen(game, y, x);
+				}
 			else
 			{
 				game->grid[y][x] = generate_char(game);
 				game->proba->grid_char_before = game->grid[y][x];
+                print_gen(game, y, x);
 			}
 			x++;
 		}
@@ -134,16 +165,10 @@ static int generate_line(t_game *game)
 
 int generate(t_game *game)
 {
-	int max;
-	int min;
-
-	max = 20;
-	min = 15;
-	game->rd_num_x = rand() % (max - min + 1) + min;
-	game->rd_num_y = rand() % (max - min + 1) + min;
-	game->grid = malloc(sizeof(char *) * game->rd_num_y);
+	game->grid = ft_calloc(game->rd_num_y + 1, sizeof(char *));
 	if (!game->grid)
 		return (1);
+	game->proba = (t_proba *)malloc(sizeof(t_proba));
 	game->proba->flag_player = 0;
 	game->proba->rep = 0;
 	game->proba->grid_char_before = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:54:31 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/14 17:13:25 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/15 17:37:15 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <time.h>
 
 /* OS Detection */
 # ifdef __APPLE__
@@ -123,8 +124,8 @@ ssize_t	ft_putun(unsigned int n);
 ssize_t	ft_puthex(unsigned int n, int index);
 ssize_t	convert(const char *str, va_list *args);
 
-int generate(t_game *game);
-
+int		main(int argc, char **argv);
+int		generate(t_game *game);
 int		begin_render(t_game *game);
 int		check_call(t_game *game);
 int		read_map(char *file);
