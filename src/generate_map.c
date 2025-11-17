@@ -94,13 +94,13 @@ static void print_gen(t_game *game, int y, int x)
 {
     mlx_put_image_to_window(game->mlx, game->win,
 			game->textures->wall, x * 64, y * 64);
-    // usleep(1e3);
+    usleep(1e3);
     mlx_put_image_to_window(game->mlx, game->win,
 			game->textures->floor, x * 64, y * 64);
-    // usleep(1e3);
+    usleep(1e3);
     mlx_put_image_to_window(game->mlx, game->win,
 			game->textures->collectible, x * 64, y * 64);
-    // usleep(1e3);
+    usleep(1e3);
 	if (game->grid[y][x] == '1')
 				mlx_put_image_to_window(game->mlx, game->win,
 					game->textures->wall, x * 64, y * 64);
@@ -119,7 +119,7 @@ static void print_gen(t_game *game, int y, int x)
 	else if (game->grid[y][x] == 'L')
 				mlx_put_image_to_window(game->mlx, game->win,
 					game->textures->lava, x * 64, y * 64);
-    // usleep(1e4);
+    usleep(1e4);
 }
 
 static int generate_line(t_game *game)

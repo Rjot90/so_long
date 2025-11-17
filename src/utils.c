@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 03:53:07 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/15 17:38:19 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/17 00:36:56 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,14 @@ void	free_ressources_grid(t_game *game)
 {
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
-	#ifdef _linux_
-		if (game->win)
+	if (game->win)
 			mlx_destroy_display(game->mlx);
-	# else
 	if (game->mlx)
 		free(game->mlx);
 	if (game->textures)
 		free(game->textures);
-	free_grid(game->grid);
-	free_grid(game->grid_bis);
+	if (game->grid)
+		free_grid(game->grid);
+	if (game->grid_bis)
+		free_grid(game->grid_bis);
 }
-
-#endif

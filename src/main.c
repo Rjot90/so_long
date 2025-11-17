@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:11:18 by apiscopo          #+#    #+#             */
-/*   Updated: 2025/11/15 18:59:21 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/17 00:37:48 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	begin_render(t_game *game)
 	int max;
 	int min;
 
-	max = 40;
-	min = 40;
+	max = 10;
+	min = 10;
 	put_null(game);
 	game->rd_num_x = rand() % (max - min + 1) + min;
 	game->rd_num_y = rand() % (max - min + 1) + min;
@@ -65,7 +65,7 @@ int	begin_render(t_game *game)
 	check_call(game);
 	flood_fill(game, game->player_x, game->player_y);
 	if (game->coin != game->grid_c || game->grid_e == 0 || game->grid_e > 4)
-		return (begin_render(game));
+		return (ft_printf("MAP IMPOSSIBLE\n"), free_resources(game), begin_render(game));
 	render_map(game);
 	put_enemy(game);
 	return (1);

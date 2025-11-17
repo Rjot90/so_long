@@ -6,7 +6,7 @@
 /*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 21:39:26 by nopauli           #+#    #+#             */
-/*   Updated: 2025/11/14 17:12:45 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/17 00:43:43 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	pos_player(t_game *game)
 			{
 				game->player_x = x;
 				game->player_y = y;
-				game->grid[y][x] = '0';
 				if (!pos_exit(game))
 					return (0);
 				return (1);

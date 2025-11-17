@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ffill_visual.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apiscopo <apiscopo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apiscopo < apiscopo@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 20:47:35 by bullestico        #+#    #+#             */
-/*   Updated: 2025/11/15 17:48:14 by apiscopo         ###   ########.fr       */
+/*   Updated: 2025/11/17 00:45:50 by apiscopo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void    print_flood(char **grid, t_game *game)
 		}
 		y++;
 	}
-    // usleep(1e4);
+    usleep(1e5);
 }
